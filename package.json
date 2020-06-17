@@ -1,0 +1,19 @@
+{
+  "name": "tbtc.bot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ronmnm/TBTC.Bot.git"
+  },
+  "author": "@ronmnm",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ronmnm/TBTC.Bot/issues"
+  },
+  "homepage": "https://github.com/ronmnm/TBTC.Bot#readme"
+}
