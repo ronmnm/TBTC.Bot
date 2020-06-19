@@ -15,5 +15,6 @@
   "bugs": {
     "url": "https://github.com/ronmnm/TBTC.Bot/issues"
   },
-  "homepage": "https://github.com/ronmnm/TBTC.Bot#readme"
+  "homepage": "https://github.com/ronmnm/TBTC.Bot#readme",
+  "dependencies": {}
 }
