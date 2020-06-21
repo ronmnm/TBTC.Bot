@@ -2,7 +2,7 @@
 
 Bot written in node.js + telegraf.js + firebase functions. Currently at an very early stage of development, so it does not have all the functionality working.
 
-The main idea of this tool is to make a little bit easier life for nude runners, help in monitoring and events handeling by notifiing subscribers.
+The main idea of this tool is to make a little bit easier life for node runners, help in monitoring and events handeling by notifiing subscribers.
 
 link https://t.me/t_btc_bot
 ### Demo
