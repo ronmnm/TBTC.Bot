@@ -59,18 +59,17 @@ class ScenesGenerator {
       let address = ctx.message.text
 
       if (web3utils.isAddress(address)) {
-        let balance = await web3.eth.getBalance(address)
-        ctx.reply(`your address is ${address}, Balance: ${balance}`)
+        ctx.reply("Done. You're subscribed! 🎉")
+        // let balance = await web3.eth.getBalance(address)
+        // ctx.reply(`your address is ${address}, Balance: ${balance}`)
         // ctx.scene.leave()
       } else {
         ctx.reply(ctx.i18n.t("not_eth_address"))
       }
     })
-    courtesy.on("message", ctx => ctx.reply("its not address"))
+    courtesy.on("message", ctx => ctx.reply(ctx.i18n.t("not_eth_address")))
     return courtesy
   }
-
-  
 }
 
 module.exports = ScenesGenerator

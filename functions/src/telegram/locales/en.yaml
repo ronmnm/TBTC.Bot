@@ -10,36 +10,45 @@ about: |-
   subscription for ECDSA node runners (operators)
   to deposits state changes they serve.
 
-  To get started just send to the bot your ETH operator
-  address, it will store in database and send
-  notification about related to that address state changes.
-
-  Available events: 
-  - deposit enters courtesy call status (when...)
-
   ✉️ Send feedback @ronmnm
 faq: |-
   ❓ <b>FAQ</b> ❓
 
   💬 <b>What I'm doing here?</b>
-        You probably looking for helper tooling for notification
-        and monitoring your node in TBTC network. You're
-        in the right place!
+        You probably looking for helper tooling for
+        notification and monitoring your node in TBTC
+        network. You're in the right place!
+
+  💬 <b>How subscriptions works?</b>
+        When you submitting the eth address it stored
+        in database, and when particular event is emitted
+        in ethereum blockchain is sends a message to
+        particular addresses that are related to those
+        deposit where event happened.
+
+    💬 <b>What is TBTC network?</b>
+        <a href="https://tbtc.network/">tbtc.network</a>
+      
+    💬 <b>Where can I mint TBTC?</b>
+        <a href="https://dapp.test.tbtc.network/">dapp.test.tbtc.network</a> (Works on Ropsten)
+
+        ///todo add more questions
+
 start_page: |-
   🏠 <b>Home Page</b> 🏠
 
   ❗<i>Note: bot under active development, bugs and inconsistencies may happen.</i>
 
   <b>Available commands:</b>
-  /start - This message.
-  Home Page - Also this message.
-  FAQ - Frequently asked questions about bot and TBTC network.
-  About - Info about bot and links to github.
+    <i>/start</i> - This message.
+    <i>Home Page</i> - Also this message.
+    <i>FAQ</i> - Frequently asked questions about bot and TBTC network.
+    <i>About</i> - Info about bot and links to github.
 
-  ⚡ <b>Subscriptions</b>
-    <b>Courtesy call</b> - Subscribe for getting notifications about courtesy calls.
+  ⚡<b>Subscriptions</b>
+    <i>Courtesy call</i> - Subscribe for getting notifications about courtesy calls.
 
-  🕸️ <b>TBTC Network Info</b> - Useful information about network.
+  🕸️<b>TBTC Network Info</b> - Useful information about network.
 
   For now all notifications about new deposits creation sends to separate channel @tbtc_deposits
 
