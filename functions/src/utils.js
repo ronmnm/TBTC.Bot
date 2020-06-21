@@ -1,4 +1,6 @@
-export function lookupAddress(artifact, network = 3) {
+
+
+module.exports = function lookupAddress(artifact, network = 3) {
   let networkId = network
   const deploymentInfo = artifact.networks[networkId]
   if (!deploymentInfo) {
@@ -6,3 +8,4 @@ export function lookupAddress(artifact, network = 3) {
   }
   return deploymentInfo
 }
+
