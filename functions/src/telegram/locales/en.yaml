@@ -55,6 +55,7 @@ start_page: |-
 subscriptions: 👇 Please select the event you want to subscribe to.
 send_courtesy_addr: Please send me ETH operator address...
 not_eth_address: Hey, it seems it is not ETH address, try again...
+congrats: Done. You're subscribed! 🎉
 
 buttons:
   courtesy: Deposit enters Courtesy Call
@@ -70,3 +71,4 @@ keyboards:
   inline:
     github: TBTC.Bot on Github
     back: ◀️ Back
+    my_subscriptions: 📝 My Subscriptions

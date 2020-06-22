@@ -9,10 +9,14 @@ module.exports.getMainKeyboard = function ({ i18n }) {
   return mainKeyboard
 }
 
-
 module.exports.getBackKeyboard = function ({ i18n }) {
   let backKeyboard = Markup.keyboard([[i18n.t("keyboards.inline.back")]])
   backKeyboard = backKeyboard.resize().extra()
   return backKeyboard
 }
 
+module.exports.getBackSubscrKeyboard = function ({ i18n }) {
+  let backKeyboard = Markup.keyboard([[i18n.t("keyboards.inline.back"), i18n.t("keyboards.inline.my_subscriptions")]])
+  backKeyboard = backKeyboard.resize().extra()
+  return backKeyboard
+}

@@ -1,14 +1,17 @@
 require("dotenv").config()
-const { functions } = require("../../firebase")
 const Telegraf = require("telegraf")
 const TelegrafI18n = require("telegraf-i18n")
 const path = require("path")
-const { Extra, Markup, Stage, session } = Telegraf
-const ScenesGenerator = require("./scenes")
+const { functions } = require("../../firebase")
 const { depositCreatedListener } = require("../web3")
+const {ScenesGenerator} = require("./scenes")
 const { getMainKeyboard } = require("./keyboard")
+const { Extra, Markup, Stage, session } = Telegraf
 
-const bot = new Telegraf(process.env.TELEGRAM_TOKEN)
+
+
+let testToken = '1272748726:AAG4bGLDqTxQ1oOZTxOd91YS06nemUkrzSk'
+const bot = new Telegraf(testToken) // process.env.TELEGRAM_TOKEN
 
 const i18n = new TelegrafI18n({
   defaultLanguage: "en",
@@ -33,24 +36,35 @@ bot.use(stage.middleware())
 
 bot.start(async ctx => {
   await ctx.replyWithHTML(ctx.i18n.t("greeting"))
-  await ctx.replyWithHTML(ctx.i18n.t("start_page"), getMainKeyboard(ctx))
+  ctx.replyWithHTML(ctx.i18n.t("start_page"), getMainKeyboard(ctx))
 })
 
+//
 bot.hears(TelegrafI18n.match("keyboards.main.subscriptions"), ctx => {
   ctx.scene.enter("subscriptions")
 })
-bot.hears(TelegrafI18n.match("keyboards.main.network_info"), ctx => ctx.reply("network info here"))
+
+bot.hears(TelegrafI18n.match("keyboards.main.network_info"), ctx => {
+  ctx.reply("network info here")
+})
+
 bot.hears(TelegrafI18n.match("keyboards.main.about"), ctx => {
   let inlineKeyboard = Extra.markup(m =>
     m.inlineKeyboard([m.urlButton(ctx.i18n.t("keyboards.inline.github"), ctx.i18n.t("github_link"))])
   )
   ctx.replyWithHTML(ctx.i18n.t("about"), inlineKeyboard)
 })
-bot.hears(TelegrafI18n.match("keyboards.main.faq"), ctx => ctx.replyWithHTML(ctx.i18n.t("faq"), Extra.webPreview(false)))
-bot.hears(TelegrafI18n.match("keyboards.main.home"), ctx => ctx.replyWithHTML(ctx.i18n.t("start_page")))
 
+bot.hears(TelegrafI18n.match("keyboards.main.faq"), ctx => {
+  ctx.replyWithHTML(ctx.i18n.t("faq"), Extra.webPreview(false))
+})
 
+bot.hears(TelegrafI18n.match("keyboards.main.home"), ctx => {
+  ctx.replyWithHTML(ctx.i18n.t("start_page"))
+})
 
+bot.launch()
+//
 exports.botFunction = functions.https.onRequest(async (req, res) => {
   bot
     .handleUpdate(req.body, res)
