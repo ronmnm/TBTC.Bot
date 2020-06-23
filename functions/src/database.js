@@ -9,8 +9,8 @@ const { db } = require("../firebase")
 module.exports.setSubscriberToDB = async function (ctx, collectionName, address) {
   let data = {
     userId: ctx.from.id,
-    first_name: ctx.from.first_name,
-    last_name: ctx.from.last_name,
+    first_name: ctx.from.first_name || null,
+    last_name: ctx.from.last_name || null,
     username: ctx.from.username,
     language_code: ctx.from.language_code,
     time: Date.now(),
@@ -34,4 +34,18 @@ module.exports.getAllSubscriptionsList = async function (ctx, collectionName) {
   })
 
   return allSubscriptions
+}
+
+module.exports.deleteAddressFromDB = async function (ctx) {
+  let buttonObject = JSON.parse(ctx.match.input)
+  let addressToDelete = buttonObject.p // payload
+  let collectionName
+  switch (buttonObject.c) { // c - collection alias
+    case 1:
+      collectionName = "CourtesyT"
+      break;
+    default:
+      break;
+  }
+  return await db.collection(collectionName).doc(addressToDelete).delete();
 }

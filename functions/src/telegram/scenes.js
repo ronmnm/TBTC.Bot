@@ -3,13 +3,16 @@ const web3utils = require("web3-utils")
 const { Telegraf } = require("telegraf")
 const { match } = require("telegraf-i18n")
 const { web3 } = require("../web3")
-const { getMainKeyboard, getBackKeyboard, getBackSubscrKeyboard } = require("./keyboard")
-const { setSubscriberToDB, getAllSubscriptionsList } = require("../database")
+const { getMainKeyboard, getBackKeyboard, getBackSubscrKeyboard, getDeleteInlineButton } = require("./keyboard")
+const { setSubscriberToDB, getAllSubscriptionsList, deleteAddressFromDB } = require("../database")
 const { Extra, Markup, Stage, session } = Telegraf
 
 const { leave } = Stage
 
 class ScenesGenerator {
+  /**
+   * Returns 'Subscriptions scene'
+   */
   subscriptionsScene() {
     let subscriptions = new Scene("subscriptions")
 
@@ -27,11 +30,6 @@ class ScenesGenerator {
       await ctx.replyWithHTML(ctx.i18n.t("keyboards.main.subscriptions"), getBackSubscrKeyboard(ctx))
     })
 
-    // subscriptions.leave(ctx => {
-    //   let mainKeyboard = getMainKeyboard(ctx)
-    //   ctx.reply("...", mainKeyboard)
-    // })
-
     // Go back to start page
     subscriptions.hears(match("keyboards.inline.back"), ctx => {
       ctx.scene.leave()
@@ -42,11 +40,15 @@ class ScenesGenerator {
     subscriptions.hears(match("keyboards.inline.my_subscriptions"), async ctx => {
       let id = ctx.from.id
       try {
-        let allSubscriptions = await getAllSubscriptionsList(ctx, "CourtesyT")
-        let filteredSubscriptions = allSubscriptions.filter(item => id === item.data.userId)
+        let courtesySubscriptions = await getAllSubscriptionsList(ctx, "CourtesyT")
+        let filteredSubscriptions = courtesySubscriptions.filter(item => id === item.data.userId)
+        
         if (filteredSubscriptions.length > 0) {
           filteredSubscriptions.forEach(item => {
-            ctx.reply(`Subscribed to courtesy calls: ${item.docId}`) // docId is eth account
+            ctx.replyWithHTML(
+              ctx.i18n.t("courtesy_subscr_title") + ` <code>${item.docId}</code>`, // docId is eth account
+              getDeleteInlineButton(ctx, Extra, item.docId, 1) // 1 - CourtesyT collection
+            ) 
           })
         } else {
           ctx.reply("You don't have any subscriptions yet.")
@@ -55,20 +57,34 @@ class ScenesGenerator {
         console.log(err)
         ctx.reply("Error when getting subscription list")
       }
-
-      // ctx.replyWithHTML(ctx.i18n.t("start_page"), getMainKeyboard(ctx))
     })
 
+    //
     subscriptions.action(/S_TO_COURTESY/, async ctx => {
       ctx.scene.enter("courtesy")
       ctx.answerCbQuery()
     })
+    subscriptions.action(/D/, async ctx => { // D - delete
+      try {
+        await deleteAddressFromDB(ctx)
+        ctx.reply('Successfully deleted')
+      } catch (err) {
+        console.log(err)
+        ctx.reply('Something went wrong...')
+      }
+      
+      ctx.answerCbQuery()
+    })
+
 
     subscriptions.on("message", ctx => ctx.reply("Select option please"))
 
     return subscriptions
   }
 
+  /**
+   * Subscribe to courtesy calls scene
+   */
   subscribeToCourtesy() {
     let courtesy = new Scene("courtesy")
     courtesy.enter(ctx => {
@@ -83,17 +99,11 @@ class ScenesGenerator {
       if (web3utils.isAddress(address)) {
         try {
           await setSubscriberToDB(ctx, "CourtesyT", address)
-          // console.log(ctx)
           ctx.reply(ctx.i18n.t("congrats"))
-          // ctx.scene.enter("subscriptions")
         } catch (err) {
           console.log("Error when setting data to firestore", err)
           ctx.reply("Something went wrong...")
         }
-
-        // let balance = await web3.eth.getBalance(address)
-        // ctx.reply(`your address is ${address}, Balance: ${balance}`)
-        // ctx.scene.leave()
       } else {
         ctx.reply(ctx.i18n.t("not_eth_address"))
       }

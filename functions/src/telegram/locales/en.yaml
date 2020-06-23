@@ -56,10 +56,12 @@ subscriptions: 👇 Please select the event you want to subscribe to.
 send_courtesy_addr: Please send me ETH operator address...
 not_eth_address: Hey, it seems it is not ETH address, try again...
 congrats: Done. You're subscribed! 🎉
+courtesy_subscr_title: Subscribed to courtesy calls
 
 buttons:
   courtesy: Deposit enters Courtesy Call
   redemption: Redemption
+  delete_from_db: ❌ Delete
 
 keyboards:
   main:
