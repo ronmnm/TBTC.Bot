@@ -5,7 +5,7 @@ Bot written in node.js + telegraf.js + firebase functions. Currently at an very 
 The main idea of this tool is to make a little bit easier life for node runners, help in monitoring and events handeling by notifiing subscribers.
 
 ### Features
-  - [x] Notification to sepate channel about new deposit creation
+  - [x] Notification to separate channel about new deposit creation
   - [ ] Listens for courtesy calls, and send notification to subsciber
   - [ ] Notifications about rewards
   - [ ] TBTC network information
