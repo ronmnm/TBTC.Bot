@@ -15,16 +15,14 @@ module.exports.setSubscriberToDB = async function (ctx, collectionName, address)
     language_code: ctx.from.language_code,
     time: Date.now(),
   }
-
-  return await db.collection(collectionName).doc(String(address)).set(data) // .set(data, { merge: true })
+  return await db.collection(collectionName).doc(String(address)).set(data)
 }
 
 /**
  * Function returns all subscribers from requested collection
- * @param {Object} ctx - context object
  * @param {String} collectionName - Collection name to get data from
  */
-module.exports.getAllSubscriptionsList = async function (ctx, collectionName) {
+module.exports.getAllSubscriptionsList = async function (collectionName) {
   let collectionRef = db.collection(collectionName)
   let snapshot = await collectionRef.get()
 
@@ -32,10 +30,13 @@ module.exports.getAllSubscriptionsList = async function (ctx, collectionName) {
   snapshot.forEach(doc => {
     allSubscriptions.push({ docId: doc.id, data: doc.data() })
   })
-
   return allSubscriptions
 }
 
+/**
+ * Delete address from particular collection in db
+ * @param {Ojebct} ctx - context object
+ */
 module.exports.deleteAddressFromDB = async function (ctx) {
   let buttonObject = JSON.parse(ctx.match.input)
   let addressToDelete = buttonObject.p // payload
