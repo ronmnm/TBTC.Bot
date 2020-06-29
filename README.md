@@ -8,7 +8,7 @@ The main idea of this tool is to make a little bit easier life for node runners,
   - [x] Notification to separate channel about new deposit creation
   - [ ] Listens for courtesy calls, and send notification to subsciber
   - [ ] Notifications about rewards
-  - [ ] TBTC network informationt
+  - [ ] TBTC network information
 
 ## Build
 1. Clone repository and install dependencies:
@@ -23,6 +23,7 @@ npm install
 npm start
 ```
 
-Link https://t.me/t_btc_bot
+### Link
+https://t.me/t_btc_bot
 ## Demo
 ![demo](https://github.com/ronmnm/TBTC.Bot/blob/master/static/demo.gif)

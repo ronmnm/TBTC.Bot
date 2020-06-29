@@ -12,7 +12,7 @@ const { Extra, Markup, Stage, session } = Telegraf
 
 
 let testToken = '1272748726:AAG4bGLDqTxQ1oOZTxOd91YS06nemUkrzSk'
-const bot = new Telegraf(testToken) // process.env.TELEGRAM_TOKEN
+const bot = new Telegraf(process.env.TELEGRAM_TOKEN) // process.env.TELEGRAM_TOKEN
 
 const i18n = new TelegrafI18n({
   defaultLanguage: "en",
