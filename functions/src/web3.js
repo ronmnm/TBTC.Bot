@@ -8,7 +8,7 @@ const { lookupAddress } = require("./utils")
 let provider = new Web3.providers.WebsocketProvider(`wss://ropsten.infura.io/ws/v3/${process.env.INFURA_TOKEN}`)
 const web3 = new Web3(provider)
 
-console.log('TBTCSystemJSON',lookupAddress(BondedECDSAKeepFactoryJSON));
+// console.log('TBTCSystemJSON',lookupAddress(BondedECDSAKeepFactoryJSON));
 
 // "0x25B60668E7a0967a86223828D20f93714D91Ee4B"
 const TbtcSystem = new web3.eth.Contract(TBTCSystemJSON.abi, lookupAddress(TBTCSystemJSON))

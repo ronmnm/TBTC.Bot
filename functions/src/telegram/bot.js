@@ -68,7 +68,7 @@ bot.hears(TelegrafI18n.match("keyboards.main.home"), ctx => {
 })
 
 bot.launch()
-// depositCreatedListener(bot)
+depositCreatedListener(bot)
 // courtesyCallListener(bot)
 //
 // exports.botFunction = functions.https.onRequest(async (req, res) => {
