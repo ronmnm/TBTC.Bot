@@ -2,10 +2,13 @@ const functions = require("firebase-functions")
 const admin = require("firebase-admin")
 
 
-let serviceAccount = require("./tbtc-bot-firebase-adminsdk.json");
+// let serviceAccount = require("./tbtc-bot-firebase-adminsdk.json");
 
 admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount),
+  credential: admin.credential.cert({
+    "private_key": process.env.FIREBASE_PRIVATE_KEY,
+    "client_email": process.env.FIREBASE_CLIENT_EMAIL,
+  }),
   databaseURL: "https://tbtc-bot-143f1.firebaseio.com"
 });
 
