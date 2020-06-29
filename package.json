@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
   },
   "repository": {
     "type": "git",
@@ -14,7 +15,20 @@
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/ronmnm/TBTC.Bot/issues"
+    
   },
   "homepage": "https://github.com/ronmnm/TBTC.Bot#readme",
-  "dependencies": {}
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "@keep-network/tbtc.js": "^1.0.2-rc.3",
+    "firebase-admin": "^8.12.1",
+    "firebase-functions": "^3.7.0",
+    "node-emoji": "^1.10.0",
+    "nodemon": "^2.0.4",
+    "telegraf": "^3.38.0",
+    "telegraf-i18n": "^6.6.0",
+    "telegraf-inline-menu": "^4.0.1",
+    "web3": "^1.2.9",
+    "web3-utils": "^1.2.9"
+  }
 }
