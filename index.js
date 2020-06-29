@@ -1,1 +1,1 @@
-require("./functions/src/telegram/bot")
+require("./src/telegram/bot")

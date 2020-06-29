@@ -1,15 +1,11 @@
-const { botFunction, bot } = require("./src/telegram/bot")
-const { depositCreatedListener } = require("./src/web3-listeners")
-const { functions } = require("./firebase")
+const { botFunction, bot } = require("../src/telegram/bot")
+const { depositCreatedListener } = require("../src/web3-listeners")
+const { functions } = require("../firebase")
 
 // exports.bot = bot
 
 exports.botFunction = botFunction
 
-exports.depositCreatedListener = functions.https.onRequest(async (req, res) => {
-  depositCreatedListener()
-  res.sendStatus(200)
-})
 // const Telegraf = require("telegraf")
 // const { functions } = require("./firebase")
 
