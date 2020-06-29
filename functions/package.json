@@ -13,12 +13,11 @@
     "node": "10"
   },
   "dependencies": {
-    "@keep-network/tbtc.js": "^1.0.1-rc.0",
+    "@keep-network/tbtc.js": "^1.0.2-rc.3",
     "dotenv": "^8.2.0",
     "firebase-admin": "^8.12.1",
     "firebase-functions": "^3.7.0",
     "node-emoji": "^1.10.0",
-    "node-telegram-bot-api": "^0.50.0",
     "nodemon": "^2.0.4",
     "telegraf": "^3.38.0",
     "telegraf-i18n": "^6.6.0",

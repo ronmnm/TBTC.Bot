@@ -3,9 +3,10 @@ const Telegraf = require("telegraf")
 const TelegrafI18n = require("telegraf-i18n")
 const path = require("path")
 const { functions } = require("../../firebase")
-const { depositCreatedListener } = require("../web3")
+const { courtesyCallListener, depositCreatedListener } = require("../web3-listeners")
 const {ScenesGenerator} = require("./scenes")
 const { getMainKeyboard } = require("./keyboard")
+const { getTotalDepositsCount } = require("../network-info")
 const { Extra, Markup, Stage, session } = Telegraf
 
 
@@ -20,7 +21,7 @@ const i18n = new TelegrafI18n({
   useSession: true,
 })
 
-bot.use(Telegraf.log())
+// bot.use(Telegraf.log())
 
 let scenesGenerator = new ScenesGenerator()
 const subscribeToCourtesy = scenesGenerator.subscribeToCourtesy()
@@ -39,13 +40,16 @@ bot.start(async ctx => {
   ctx.replyWithHTML(ctx.i18n.t("start_page"), getMainKeyboard(ctx))
 })
 
-//
+
+
 bot.hears(TelegrafI18n.match("keyboards.main.subscriptions"), ctx => {
   ctx.scene.enter("subscriptions")
 })
 
-bot.hears(TelegrafI18n.match("keyboards.main.network_info"), ctx => {
-  ctx.reply("network info here")
+bot.hears(TelegrafI18n.match("keyboards.main.network_info"), async ctx => {
+  let depositsCount = await getTotalDepositsCount()
+
+  ctx.replyWithHTML(ctx.i18n.t("network_info", {depositsCount}))
 })
 
 bot.hears(TelegrafI18n.match("keyboards.main.about"), ctx => {
@@ -64,16 +68,17 @@ bot.hears(TelegrafI18n.match("keyboards.main.home"), ctx => {
 })
 
 bot.launch()
+// depositCreatedListener(bot)
+// courtesyCallListener(bot)
 //
-exports.botFunction = functions.https.onRequest(async (req, res) => {
-  bot
-    .handleUpdate(req.body, res)
-    .then(rv => {
-      !rv && res.sendStatus(200)
-      return res.end()
-    })
-    .catch(err => {
-      console.error(err)
-      return res.end()
-    })
-})
+// exports.botFunction = functions.https.onRequest(async (req, res) => {
+//   bot.handleUpdate(req.body, res)
+//     .then(rv => {
+//       !rv && res.sendStatus(200)
+//       return res.end()
+//     })
+//     .catch(err => {
+//       console.error(err)
+//       return res.end()
+//     })
+// })

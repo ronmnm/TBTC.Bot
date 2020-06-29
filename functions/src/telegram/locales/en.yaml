@@ -52,6 +52,9 @@ start_page: |-
 
   For now all notifications about new deposits creation sends to separate channel @tbtc_deposits
 
+network_info: |-
+  Total TBTC deposits created: <b>${depositsCount}</b>
+
 subscriptions: 👇 Please select the event you want to subscribe to.
 send_courtesy_addr: Please send me ETH operator address...
 not_eth_address: Hey, it seems it is not ETH address, try again...
@@ -59,7 +62,7 @@ congrats: Done. You're subscribed! 🎉
 courtesy_subscr_title: Subscribed to courtesy calls
 
 buttons:
-  courtesy: Deposit enters Courtesy Call
+  courtesy: 🍎 Deposit enters "Courtesy Call"
   redemption: Redemption
   delete_from_db: ❌ Delete
 

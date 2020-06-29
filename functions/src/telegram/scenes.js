@@ -21,7 +21,7 @@ class ScenesGenerator {
         m.inlineKeyboard(
           [
             [m.callbackButton(ctx.i18n.t("buttons.courtesy"), JSON.stringify({ a: "S_TO_COURTESY" }), false)],
-            [m.callbackButton(ctx.i18n.t("buttons.redemption"), JSON.stringify({ a: "S_TO_REDEMPTION" }), false)],
+            // [m.callbackButton(ctx.i18n.t("buttons.redemption"), JSON.stringify({ a: "S_TO_REDEMPTION" }), false)],
           ],
           {}
         )
@@ -40,9 +40,9 @@ class ScenesGenerator {
     subscriptions.hears(match("keyboards.inline.my_subscriptions"), async ctx => {
       let id = ctx.from.id
       try {
-        let courtesySubscriptions = await getAllSubscriptionsList(ctx, "CourtesyT")
+        let courtesySubscriptions = await getAllSubscriptionsList("CourtesyT")
         let filteredSubscriptions = courtesySubscriptions.filter(item => id === item.data.userId)
-        
+
         if (filteredSubscriptions.length > 0) {
           filteredSubscriptions.forEach(item => {
             ctx.replyWithHTML(
@@ -58,6 +58,7 @@ class ScenesGenerator {
         ctx.reply("Error when getting subscription list")
       }
     })
+    
 
     //
     subscriptions.action(/S_TO_COURTESY/, async ctx => {

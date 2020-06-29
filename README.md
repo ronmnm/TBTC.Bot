@@ -8,7 +8,7 @@ The main idea of this tool is to make a little bit easier life for node runners,
   - [x] Notification to separate channel about new deposit creation
   - [ ] Listens for courtesy calls, and send notification to subsciber
   - [ ] Notifications about rewards
-  - [ ] TBTC network information
+  - [ ] TBTC network informationt
 
 link https://t.me/t_btc_bot
 ### Demo
