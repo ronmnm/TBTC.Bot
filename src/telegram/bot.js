@@ -4,14 +4,12 @@ const TelegrafI18n = require("telegraf-i18n")
 const path = require("path")
 const { functions } = require("../../firebase")
 const { courtesyCallListener, depositCreatedListener } = require("../web3-listeners")
-const {ScenesGenerator} = require("./scenes")
+const { ScenesGenerator } = require("./scenes")
 const { getMainKeyboard } = require("./keyboard")
-const { getTotalDepositsCount } = require("../network-info")
+const { getNetworkData } = require("../network-info")
 const { Extra, Markup, Stage, session } = Telegraf
 
-
-
-let testToken = '1272748726:AAG4bGLDqTxQ1oOZTxOd91YS06nemUkrzSk'
+let testToken = "1272748726:AAG4bGLDqTxQ1oOZTxOd91YS06nemUkrzSk"
 const bot = new Telegraf(process.env.TELEGRAM_TOKEN) // process.env.TELEGRAM_TOKEN
 
 const i18n = new TelegrafI18n({
@@ -40,16 +38,20 @@ bot.start(async ctx => {
   ctx.replyWithHTML(ctx.i18n.t("start_page"), getMainKeyboard(ctx))
 })
 
-
-
 bot.hears(TelegrafI18n.match("keyboards.main.subscriptions"), ctx => {
   ctx.scene.enter("subscriptions")
 })
 
 bot.hears(TelegrafI18n.match("keyboards.main.network_info"), async ctx => {
-  let depositsCount = await getTotalDepositsCount()
+  let data = await getNetworkData()
 
-  ctx.replyWithHTML(ctx.i18n.t("network_info", {depositsCount}))
+  ctx.replyWithHTML(
+    ctx.i18n.t("network_info", {
+      depositsCount: data.depositsCount,
+      bondedETH: data.bondedETH,
+      tbtcMinted: data.tbtcMinted,
+    })
+  )
 })
 
 bot.hears(TelegrafI18n.match("keyboards.main.about"), ctx => {

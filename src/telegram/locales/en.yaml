@@ -54,6 +54,8 @@ start_page: |-
 
 network_info: |-
   Total TBTC deposits created: <b>${depositsCount}</b>
+  Total ETH bonded: <b>${bondedETH} ETH</b>
+  TBTC minted: <b>${tbtcMinted}</b>
 
 subscriptions: 👇 Please select the event you want to subscribe to.
 send_courtesy_addr: Please send me ETH operator address...

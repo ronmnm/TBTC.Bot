@@ -1,8 +1,14 @@
-const { TbtcSystem, web3 } = require("./web3")
+const { TbtcSystem, TBTCToken, web3, KeepBondingAddress } = require("./web3")
 
-module.exports.getTotalDepositsCount = async function () {
+module.exports.getNetworkData = async function () {
   let createdEvents = await TbtcSystem.getPastEvents("Created", {
     fromBlock: 7863015,
   })
-  return createdEvents.length
+
+  let bondedETHWei = await web3.eth.getBalance(KeepBondingAddress)
+  let bondedETH = Number(web3.utils.fromWei(bondedETHWei, "ether")).toFixed(2)
+
+  let tbtcMinted = await TBTCToken.methods.totalSupply().call()
+
+  return { depositsCount: createdEvents.length, bondedETH, tbtcMinted }
 }
