@@ -6,9 +6,10 @@ The main idea of this tool is to make a little bit easier life for node runners,
 
 ## Features
   - [x] Notification to separate channel about new deposit creation
-  - [ ] Listens for courtesy calls, and send notification to subsciber
+  - [x] TBTC network information
+  - [ ] Listens for courtesy calls, and send notification to subscriber
   - [ ] Notifications about rewards
-  - [ ] TBTC network information
+
 
 ## Build
 1. Clone repository and install dependencies:
