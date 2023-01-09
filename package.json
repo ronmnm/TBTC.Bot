@@ -21,7 +21,7 @@
   "dependencies": {
     "dotenv": "^8.2.0",
     "@keep-network/tbtc.js": "^1.0.2-rc.3",
-    "firebase-admin": "^8.12.1",
+    "firebase-admin": "^11.4.1",
     "firebase-functions": "^3.7.0",
     "node-emoji": "^1.10.0",
     "nodemon": "^2.0.4",
